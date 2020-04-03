@@ -24,6 +24,22 @@ namespace ENI_Xamarin_30032020.Services
             }
         }
 
+        public List<Tweet> Search(string search)
+        {
+            List<Tweet> result = new List<Tweet>();
+            using (var db = new AppDbContext())
+            {
+                result = db.Tweets.Include(x => x.User)
+                    .Where(t => t.Content.Contains(search) 
+                    || t.User.Login.Contains(search) 
+                    || t.User.Pseudo.Contains(search) 
+                    || t.CreationDate.ToString().Contains(search))
+                    .ToList();
+            }
+
+            return result;
+        }
+
         public String Authenticate(User user)
         {
             bool haveError = false;

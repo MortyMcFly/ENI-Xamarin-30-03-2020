@@ -9,5 +9,6 @@ namespace ENI_Xamarin_30032020.Services
     {
         string Authenticate(User user);
         List<Tweet> Tweets { get; }
+        List<Tweet> Search(string search) { get; }
     }
 }
